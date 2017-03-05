@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractclassmethod
 
-class ActionType(object):
+class Action(object):
 
     __metaclass__ = ABCMeta
 

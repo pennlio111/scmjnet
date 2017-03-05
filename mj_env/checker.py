@@ -1,18 +1,28 @@
 class Checker(object):
 
-    def checkWin(self):
+    @staticmethod
+    def checkHu(self, handTile):
         pass
 
-    def checkJiao(self):
+    @staticmethod
+    def checkJiao(self, handTile):
         """如果下叫，进入听牌状态"""
         pass
 
-    def checkPeng(self):
+    @staticmethod
+    def checkPeng(self, handTile):
         pass
 
-    def checkGang(self):
+    @staticmethod
+    def checkGang(self, handTile):
         pass
 
-    def checkPattern(self):
-        """检查胡了哪种"""
-        pass
+    @staticmethod
+    def checkPattern(self, handTile):
+        """
+        检查胡的番数，返回系数
+        :param self:
+        :param handTile:
+        :return: int
+        """
+        return 1

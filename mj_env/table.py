@@ -17,7 +17,7 @@ class MahjongTable(object):
         self.shuffleSuite()
         self.__drawnTiles = []
         self.__poolTiles = []
-        print(len(self.__tileWall))
+        print("====== Game START ========")
 
     def shuffleSuite(self):
         """
@@ -27,7 +27,12 @@ class MahjongTable(object):
         return
 
     def toBeDrawnTop(self, count):
-        drawn = []
+        """
+        return draw tiles as a list from the top of the tileWall
+        :param count:
+        :return: a deque
+        """
+        drawn = collections.deque([])
         if 0 < count <= len(self.__tileWall):
             while count > 0:
                 tile = self.__tileWall.popleft()
@@ -38,11 +43,11 @@ class MahjongTable(object):
 
     def toBeDrawnBottom(self, count):
         """
-        return draw tiles as a list from the top of the tileWall
+        return draw tiles as a list from the bottom of the tileWall
         :param count:
-        :return:
+        :return: a deque
         """
-        drawn = []
+        drawn = collections.deque([])
         if 0 < count <= len(self.__tileWall):
             while count > 0:
                 tile = self.__tileWall.popl()

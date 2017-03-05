@@ -3,17 +3,34 @@
 
 ##阶段计划
 
+###第一阶段
 1. 麻将ENV
-2. 单人麻将
-3. 双人麻将
-- 1. dummy AI
-- 2. ordinary AI
-- 3. gaming AI
-4. 四人麻将(联网training）
+- support basic function
+- support single patterns in win case:
+    - 清一色
+    - 大对
+    - 七对
+    - 杠牌
+- support more patterns
+2. 双人麻将
+- dummy AI：
+    - random discard an isolated tile
+    - if there is a special action: do it
+###第二阶段
+2. 双人麻将
+- ordinary AI
+    - calculate the prob by every action
+- smart AI
+    - knows n tiles in forthcoming tilewall
+    - knows part of the hand tile of the opponent
+###第三阶段
+- learning AI:
+    - use gan in training AI and the player?
+    - extend the model to four player case?
+    - support more actions and patterns
 
+###时间计划
 
-##时间计划
-
-- 0.1阶段： 1 - 2 月 (4月完成）
-- 2阶段： 1-2： 1个月； 3：1-3月
-- 3阶段：。。。
+- 1阶段： 2 月 (4月完成）
+- 2阶段： 2-3 月
+- 3阶段：
