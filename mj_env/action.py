@@ -1,17 +1,14 @@
 from abc import ABCMeta, abstractclassmethod
 
+
 class Action(object):
 
     __metaclass__ = ABCMeta
 
     @abstractclassmethod
-    def canDo(self):
+    def can_do(self):
         pass
 
     @abstractclassmethod
-    def canPass(self):
-        pass
-
-    @abstractclassmethod
-    def isLegalAction(self):
+    def can_pass(self):
         pass

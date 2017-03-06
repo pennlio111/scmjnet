@@ -4,65 +4,65 @@ from mj_env.tile import MahjongSuite
 
 class MahjongTable(object):
     def __init__(self, players, dealerIndex):
-        self.__tileWall = collections.deque([])
-        self.__drawnTiles = []
-        self.__poolTiles = []
-        self.__tileSuite = MahjongSuite().allSuite()
+        self.__tile_wall = collections.deque([])
+        self.__drawn_tiles = []
+        self.__pool_tiles = []
+        self.__the_suite = MahjongSuite().all_suite()
         self.__players = players
         # set dealer
-        self.__players[dealerIndex].setDealer()
+        self.__players[dealerIndex].set_dealer()
 
-    def getReady(self):
+    def get_ready(self):
         # reset all parameters
-        self.shuffleSuite()
-        self.__drawnTiles = []
-        self.__poolTiles = []
+        self.__shuffle_tile_suite()
+        self.__drawn_tiles = []
+        self.__pool_tiles = []
         print("====== Game START ========")
 
-    def shuffleSuite(self):
+    def __shuffle_tile_suite(self):
         """
         shuffle the suite
         """
-        self.__tileWall = collections.deque(np.random.permutation(self.__tileSuite))
+        self.__tile_wall = collections.deque(np.random.permutation(self.__the_suite))
         return
 
-    def toBeDrawnTop(self, count):
+    def drawn_from_top(self, count):
         """
         return draw tiles as a list from the top of the tileWall
         :param count:
         :return: a deque
         """
         drawn = collections.deque([])
-        if 0 < count <= len(self.__tileWall):
+        if 0 < count <= len(self.__tile_wall):
             while count > 0:
-                tile = self.__tileWall.popleft()
-                self.__drawnTiles.append(tile)
+                tile = self.__tile_wall.popleft()
+                self.__drawn_tiles.append(tile)
                 drawn.append(tile)
                 count -= 1
         return drawn
 
-    def toBeDrawnBottom(self, count):
+    def drawn_from_bottom(self, count):
         """
         return draw tiles as a list from the bottom of the tileWall
         :param count:
         :return: a deque
         """
         drawn = collections.deque([])
-        if 0 < count <= len(self.__tileWall):
+        if 0 < count <= len(self.__tile_wall):
             while count > 0:
-                tile = self.__tileWall.popl()
-                self.__drawnTiles.append(tile)
+                tile = self.__tile_wall.popl()
+                self.__drawn_tiles.append(tile)
                 drawn.append(tile)
                 count -= 1
         return drawn
 
-    def takeDiscardTile(self, tile):
-        self.__poolTiles.append(tile)
+    def take_the_discarded_tile(self, tile):
+        self.__pool_tiles.append(tile)
         return
 
-    def showPool(self):
+    def show_the_pool(self):
         print("Pool:")
-        print(self.__poolTiles)
+        print(self.__pool_tiles)
 
-    def getBottomSize(self):
-        return len(self.__tileWall)
+    def get_bottom_size(self):
+        return len(self.__tile_wall)

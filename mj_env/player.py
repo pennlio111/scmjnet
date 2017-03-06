@@ -1,7 +1,7 @@
 from .checker import Checker
 
 class Player(object):
-    def __init__(self, name, id, dealer = False, money = 0):
+    def __init__(self, name, id, dealer=False, money=0):
         self.name = name
         self.id = id
         self.__handTile = HandTile([])
@@ -9,18 +9,18 @@ class Player(object):
         self.__dealer = dealer
         self.__money = money
 
-    def setDealer(self):
+    def set_dealer(self):
         self.__dealer = True
 
-    def draw(self, table, cnt, fromTop = True):
-        tileDeque = table.toBeDrawnTop(cnt) if fromTop else table.toBeDrawnBottom(cnt)
+    def draw(self, table, cnt, fromTop=True):
+        tile_deque = table.drawn_from_top(cnt) if fromTop else table.drawn_from_bottom(cnt)
         # update handTile
-        while tileDeque:
-            self.__handTile.appendInvisibleTile(tileDeque.popleft())
+        while tile_deque:
+            self.__handTile.appendInvisibleTile(tile_deque.popleft())
         self.__handTile.sortInvisibleTiles()
         return
 
-    def isDealer(self):
+    def is_dealer(self):
         return self.__dealer
 
     def discard(self, i, table):
@@ -30,7 +30,7 @@ class Player(object):
         else:
             tile = self.__handTile.discard(i)
             self.__discardTiles.append(tile)
-            table.takeDiscardTile(tile)
+            table.take_the_discarded_tile(tile)
         return
 
     def getHandTile(self):
@@ -38,45 +38,46 @@ class Player(object):
 
     def win(self):
         "胡牌"
-        return True if Checker.checkHu(self.__handTile) else False
+        return True if Checker.check_hu(self.__handTile) else False
 
 
 class HandTile(object):
-    def __init__(self, tiles):
-        self.__visibleTiles = tiles
-        self.__invisibleTiles = []
-        self.__tiles = self.__visibleTiles + self.__invisibleTiles
-
-    def sortTiles(self):
-        self.__tiles.sort(key=lambda x: x.number)
-        self.__tiles.sort(key=lambda x: x.family)
+    def __init__(self, invisible_tiles, visible_tiles = []):
+        self.__visible = visible_tiles
+        self.__invisible = invisible_tiles
 
     def discard(self, i):
-        return self.__invisibleTiles.pop(i)
+        return self.__invisible.pop(i)
 
     def sortInvisibleTiles(self):
-        self.__invisibleTiles.sort(key=lambda x: x.number)
-        self.__invisibleTiles.sort(key=lambda x: x.family)
+        self.__sortTiles(self.__invisible)
 
     def sortVisibleTiles(self):
-        self.__visibleTiles.sort(key=lambda x: x.number)
-        self.__visibleTiles.sort(key=lambda x: x.number)
+        self.__sortTiles(self.__visible)
+
+    def __sortTiles(self, tiles):
+        tiles.sort(key=lambda x: x.id)
+        tiles.sort(key=lambda x: x.number)
+        tiles.sort(key=lambda x: x.family)
 
     def appendVisibleTile(self, tile):
-        self.__visibleTiles.append(tile)
+        self.__visible.append(tile)
 
     def appendInvisibleTile(self, tile):
-        self.__invisibleTiles.append(tile)
+        self.__invisible.append(tile)
 
     def getInvisibleTiles(self):
-        return self.__invisibleTiles
+        return self.__invisible
 
     def getVisibleTiles(self):
-        return self.__visibleTiles
+        return self.__visible
+
+    def get_all_tiles(self):
+        return self.__visible + self.__invisible
 
     def __repr__(self):
         split_line = "-"*10
-        return self.__invisibleTiles.__repr__() + "\n" + self.__visibleTiles.__repr__() + "\n" + split_line
+        return self.__invisible.__repr__() + "\n" + self.__visible.__repr__() + "\n" + split_line
 
 
 

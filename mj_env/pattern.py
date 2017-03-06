@@ -8,7 +8,7 @@ class Pattern(object):
         self.multiplier = multiplier
 
     @abstractclassmethod
-    def isValid(self, handTile):
+    def is_valid(self, handTile):
         pass
 
 class QiduiPattern(Pattern):
@@ -16,12 +16,12 @@ class QiduiPattern(Pattern):
     def __init__(self):
         super().__init__("Qidui", 4)
 
-    def isValid(self, handTile):
+    def is_valid(self, handTile):
         pass
 
 class KaXingWuPattern(Pattern):
     def __init__(self, name, multiplier):
         super().__init__("KaXingWu", 2)
 
-    def isValid(self, handTile):
+    def is_valid(self, handTile):
         pass
