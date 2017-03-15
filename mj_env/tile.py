@@ -12,6 +12,7 @@ class Tile(object):
         if isinstance(other, self.__class__):
             return self.number == other.number and self.family == other.family
 
+
 class MahjongSuite(object):
     def __init__(self):
         self.suit = []

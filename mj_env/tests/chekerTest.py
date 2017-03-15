@@ -91,8 +91,8 @@ class TestCheckerMethods(unittest.TestCase):
             Tile("筒", 3, 0)
         ]
 
-        self.assertTrue(Checker.check_hu(HandTile(win_tile1)))
-        self.assertTrue(Checker.check_hu(HandTile(win_tile2)))
-        self.assertTrue(Checker.check_hu(HandTile(win_tile3)))
-        self.assertFalse(Checker.check_hu(HandTile(no_win_tile1)))
-        self.assertFalse(Checker.check_hu(HandTile(no_win_tile2)))
+        self.assertTrue(Checker.check_win(HandTile(win_tile1)))
+        self.assertTrue(Checker.check_win(HandTile(win_tile2)))
+        self.assertTrue(Checker.check_win(HandTile(win_tile3)))
+        self.assertFalse(Checker.check_win(HandTile(no_win_tile1)))
+        self.assertFalse(Checker.check_win(HandTile(no_win_tile2)))

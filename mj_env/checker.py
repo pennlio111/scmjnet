@@ -1,20 +1,18 @@
-WIN_TILE_SIZE_WITHOUT_GANG = 14
+from mj_env.tile import MahjongSuite
+import copy
 
 
 class Checker(object):
     @staticmethod
-    def check_hu(hand_tile):
-        # handTile.
-        tile = hand_tile.getInvisibleTiles() #todo: 加入吃碰杠的情况
-        tile.sort(key=lambda x: x.id)
-        tile.sort(key=lambda x: x.number)
-        tile.sort(key=lambda x: x.family)
+    def check_win(hand_tile):
+        hand_tile.sort_private_tiles()
+        tile = hand_tile.get_private_tiles() #todo: 加入吃碰杠的情况
         for i in range(1, len(tile)):
             if tile[i-1].number == tile[i].number and tile[i-1].family == tile[i].family:
                 # start dfs
                 left = Checker.__has_valid_units(tile[:i-1], [], [])
                 right = Checker.__has_valid_units(tile[i+1:], [], [])
-                if left and right and len(tile) == WIN_TILE_SIZE_WITHOUT_GANG:
+                if left and right and len(tile) == hand_tile.get_private_tile_size_to_win:
                     return True
         return False
 
@@ -50,23 +48,31 @@ class Checker(object):
 
 
     @staticmethod
-    def checkJiao(self, hand_tile):
+    def check_jiao(hand_tile):
         """如果下叫，进入听牌状态"""
+        if len(hand_tile.get_private_tiles()) != hand_tile.get_private_tile_size_to_win() - 1:
+            return []
+        jiao_tiles = []
+        suite = MahjongSuite().all_suite()
+        for tile in suite:
+            win_hand_tile = copy.deepcopy(hand_tile)
+            win_hand_tile.append_private_tile(tile)
+            if Checker.check_win(win_hand_tile) and hand_tile.count(tile) < 4:
+                jiao_tiles.append(tile)
+        return jiao_tiles
+
+    @staticmethod
+    def check_peng(handTile):
         pass
 
     @staticmethod
-    def checkPeng(self, handTile):
+    def checkGang(handTile):
         pass
 
     @staticmethod
-    def checkGang(self, handTile):
-        pass
-
-    @staticmethod
-    def checkPattern(self, handTile):
+    def checkPattern(handTile):
         """
         检查胡的番数，返回系数
-        :param self:
         :param handTile:
         :return: int
         """
