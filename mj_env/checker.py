@@ -8,18 +8,17 @@ class Checker(object):
         hand_tile.sort_private_tiles()
         tile = hand_tile.get_private_tiles() #todo: 加入吃碰杠的情况
         for i in range(1, len(tile)):
-            if tile[i-1].number == tile[i].number and tile[i-1].family == tile[i].family:
-                # start dfs
+            if tile[i-1] == tile[i]: # jiang
                 left = Checker.__has_valid_units(tile[:i-1], [], [])
                 right = Checker.__has_valid_units(tile[i+1:], [], [])
-                if left and right and len(tile) == hand_tile.get_private_tile_size_to_win:
+                if left and right and len(tile) == hand_tile.get_private_tile_size_to_win():
                     return True
         return False
 
     @staticmethod
     def __has_valid_units(tile, units, unit_to_build):
         if len(unit_to_build) == 3:
-            if Checker.__valid_three(unit_to_build):
+            if Checker.__valid_unit_of_three(unit_to_build):
                 return Checker.__has_valid_units(tile, units + unit_to_build, [])
             else: # 回到上一层DFS
                 return False
@@ -38,13 +37,13 @@ class Checker(object):
             return False
 
     @staticmethod
-    def __valid_three(tiles):
+    def __valid_unit_of_three(tiles):
         if len(tiles) != 3:
             return False
-        same_number = all(x == tiles[0] for x in tiles)
-        step_increase = all(tiles[i].family == tiles[i-1].family and tiles[i].number - tiles[i-1].number == 1
+        triples = all(x == tiles[0] for x in tiles)
+        triplets = all(tiles[i].family == tiles[i-1].family and tiles[i].number - tiles[i-1].number == 1
                             for i in range(1, len(tiles)))
-        return same_number or step_increase
+        return triples or triplets
 
 
     @staticmethod

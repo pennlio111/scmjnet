@@ -1,6 +1,6 @@
 class Tile(object):
 
-    def __init__(self, family, number, id):
+    def __init__(self, family, number, id = 0):
         self.family = family
         self.number = number
         self.id = id

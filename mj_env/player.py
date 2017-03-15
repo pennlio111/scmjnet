@@ -70,9 +70,9 @@ class Player(object):
 
 
 class HandTile(object):
-    def __init__(self):
-        self.__public = []
-        self.__private = []
+    def __init__(self, private = [], public=[]):
+        self.__public = public
+        self.__private = private
         self.__last = None
         self.__private_tile_size_to_win = DEFAULT_WIN_PRIVATE_TILE_SIZE
 
