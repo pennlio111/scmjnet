@@ -1,4 +1,5 @@
 from mj_env.tile import Tile
+from mj_checker.mahjong import xiangtingshu_output
 import textwrap
 
 
@@ -33,3 +34,9 @@ class CheckerAdapter(object):
     def transform_to_tiles(tile_string):
         tile_list = textwrap.wrap(tile_string, 2)
         return [CheckerAdapter.string_to_tile(x) for x in tile_list]
+
+    @staticmethod
+    def get_xiangtingshu(tile_string):
+        return xiangtingshu_output(tile_string)
+
+
