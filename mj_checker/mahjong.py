@@ -475,15 +475,18 @@ def xiangtingshu_output(hand, raw_hand=True):
             xiangtingshu_lowest = xiangtingshu
         elif xiangtingshu == xiangtingshu_lowest:
             best_cards.append((card, xiangtingshu, num_youxiaopai, list_youxiaopai))
-    # 输出
-    print('手牌: ', end = '')
-    print_hand(hand) # 输出手牌内容
-    #print(best_cards)
-    for card, xiangtingshu, num_youxiaopai, list_youxiaopai in best_cards:
-        youxiaopai = ''
-        for i in list_youxiaopai:
-            youxiaopai += str(i)
-        print('打{}, 向听数{}, 有效牌{}, {}种{}张'.format(card, xiangtingshu, youxiaopai, len(list_youxiaopai), num_youxiaopai))    
+    # # 输出
+    # print('手牌: ', end = '')
+    # print_hand(hand) # 输出手牌内容
+    # #print(best_cards)
+    # for card, xiangtingshu, num_youxiaopai, list_youxiaopai in best_cards:
+    #     youxiaopai = ''
+    #     for i in list_youxiaopai:
+    #         youxiaopai += str(i)
+    #     print('打{}, 向听数{}, 有效牌{}, {}种{}张'.format(card, xiangtingshu, youxiaopai, len(list_youxiaopai), num_youxiaopai))
+
+        return best_cards
+
 
 def main():
     """main func.

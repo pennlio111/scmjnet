@@ -119,4 +119,4 @@ class TestCheckerAdapterMethods(unittest.TestCase):
             Tile("筒", 1, 1)
         ]
         wts = CheckerAdapter.transform_to_string(win_tile1)
-        print(CheckerAdapter.get_xiangtingshu(wts))
+        self.assertEquals(CheckerAdapter.get_xiangtingshu(wts),)

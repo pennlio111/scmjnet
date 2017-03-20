@@ -27,6 +27,10 @@ class CheckerAdapter(object):
         return Tile(CheckerAdapter.__letter_to_char[s[1]], int(s[0]))  # todo: to fix lost id information after the transform
 
     @staticmethod
+    def card_to_tile(card):
+        return Tile(CheckerAdapter.__letter_to_char[card.get_suit()], card.get_rank())
+
+    @staticmethod
     def transform_to_string(tiles):
         return [CheckerAdapter.tile_to_string(x) for x in tiles]
 
@@ -37,6 +41,5 @@ class CheckerAdapter(object):
 
     @staticmethod
     def get_xiangtingshu(tile_string):
-        return xiangtingshu_output(tile_string)
-
-
+        best_cards = xiangtingshu_output(tile_string)
+        return [(CheckerAdapter.card_to_tile(bc[0]), bc[1], bc[2], [CheckerAdapter.card_to_tile(c) for c in bc[3]]) for bc in best_cards]
